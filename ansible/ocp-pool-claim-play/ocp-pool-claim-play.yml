@@ -15,15 +15,6 @@
       - ocp_login # login to hive cluster
       - ocp_pool_claim
 
-    tasks:
-      - name: Display cluster details
-        command: cat cluster_details.log
-        register: cluster_details
-
-      - name: Print details
-        debug:
-          msg: "{{ cluster_details.stdout }}"
-
   - name: "setup claimed ocp cluster"
     hosts: ocp_claimed_cluster
     vars_files:
@@ -56,7 +47,7 @@
     tasks:
 
       - name: Display cluster details
-        command: cat cluster_details.log
+        command: "cat {{ claim_name }}_details.log"
         register: cluster_details
 
       - name: Print details
